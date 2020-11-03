@@ -38,6 +38,7 @@ class SearchController < ApplicationController
       User.where("name LIKE ?", "#{value}%")
     elsif model == 'book'
       Book.where("title LIKE ?", "#{value}%")
+      byebug
     end
   end
   

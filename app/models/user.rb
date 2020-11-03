@@ -20,5 +20,18 @@ class User < ApplicationRecord
   def followed_by?(user)
     passive_relationships.find_by(following_id: user.id).present?
   end
+  
+  # ここから都道府県コードから都道府県名への変換記述
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
+　#@user.prefecture_nameなどで参照できるようにする記述
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
 
 end
