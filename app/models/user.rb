@@ -25,7 +25,7 @@ class User < ApplicationRecord
   include JpPrefecture
   jp_prefecture :prefecture_code
 
-　#@user.prefecture_nameなどで参照できるようにする記述
+  #@user.prefecture_nameなどで参照できるようにする記述
   def prefecture_name
     JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
   end

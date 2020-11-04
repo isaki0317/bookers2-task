@@ -14,8 +14,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :email,
       :postcode,
-      :prefecture_name,
-      :address_city
+      :prefecture_code,
+      :address_city,
+      :street
     ])
   end
 end
