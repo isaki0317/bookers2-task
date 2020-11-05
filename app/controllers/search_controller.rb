@@ -27,18 +27,17 @@ class SearchController < ApplicationController
   
   def backward(model, value)
     if model == 'user'
-      User.where("name LIKE ?", "#{value}%")
+      User.where("name LIKE ?", "%#{value}")
     elsif model == 'book'
-      Book.where("title LIKE ?", "#{value}%")
+      Book.where("title LIKE ?", "%#{value}")
     end
   end
   
   def partical(model, value)
     if model == 'user'
-      User.where("name LIKE ?", "#{value}%")
+      User.where("name LIKE ?", "%#{value}%")
     elsif model == 'book'
-      Book.where("title LIKE ?", "#{value}%")
-      byebug
+      Book.where("title LIKE ?", "%#{value}%")
     end
   end
   
