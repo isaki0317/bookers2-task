@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   
+  devise_for :users, controllers: {
+    sessions: 'public/sessions',
+    registrations: 'public/registrations',
+  }
   get '/search' => 'search#search'
   
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations',
-  }
   
   resources :users, only: [:show,:index,:edit,:update] do
     resource :relationships, only: [:create, :destroy]
