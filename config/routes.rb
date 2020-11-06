@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   }
   get '/search' => 'search#search'
   
+  resources :chat, :only => [:create, :show]
+  resources :rooms, :only => [:create]
   
   resources :users, only: [:show,:index,:edit,:update] do
     resource :relationships, only: [:create, :destroy]
