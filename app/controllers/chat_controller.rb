@@ -1,16 +1,14 @@
 class ChatController < ApplicationController
   
-  before_action :authenticate_user!, :only => [:create]
+  before_action :authenticate_user!, :only => [:create, :chow]
 
   def create
-    if UserRoom.where(:user_id => current_user.id, :room_id => params[:chat][:room_id]).present?
-      @message = Chat.create(params.require(:chat).permit(:user_id, :content, :room_id).merge(:user_id => current_user.id))
-      redirect_to "/chat/#{@message.room_id}"
-    else
-      redirect_back(fallback_location: root_path)
-    end
+    @chat = current_user.chat.new(chat_params)
+    @chat.save
+    @room = @chat.room
+    @chat_all = @room.chat
+      # redirect_to chat_path(@message.room_id)
   end
-  
   def show
     @room = Room.find(params[:id])
     if UserRoom.where(:user_id => current_user.id, :room_id => @room.id).present?
@@ -20,6 +18,12 @@ class ChatController < ApplicationController
     else
       redirect_back(fallback_location: root_path)
     end
+  end
+  
+  private
+
+  def chat_params
+    params.require(:chat).permit(:content, :room_id)
   end
   
 end

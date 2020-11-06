@@ -1,0 +1,2 @@
+$('.chat-ajax_<%= @room.id %>').html("<%= j(render partial: 'chat/chat', locals: {messages: @chat_all}) %>");
+$('input[type=text]').val("")

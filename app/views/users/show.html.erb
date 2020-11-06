@@ -7,7 +7,7 @@
 
 		<% else %>
   		<% if @isRoom == true %>
-    		<p><a href="/chat/<%= @roomId %>">チャットへ</a>
+    		<%= link_to "チャットへ", chat_path(@roomId) %>
   		<% else %>
     		<%= form_for @room do |f| %>
 		      <%= fields_for @entry do |e| %>
